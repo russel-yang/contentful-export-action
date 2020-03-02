@@ -1,0 +1,30 @@
+name: "contentful export"
+description: "export contentful to S3"
+inputs:
+  management_token: # id of input
+    description: "Contentful management API token"
+    required: true
+  space_id: # id of input
+    description: "contentful space id"
+    required: true
+  contentful_environment: # id of input
+    description: "contentful envrionment"
+    required: true
+    default: master
+  download_assets:
+    description: "download assets or not"
+    required: true
+    default: false
+  bucket_name:
+    description: "the bucket name storing the backup"
+    required: true
+  project_name:
+    description: the project name used to prefix the S3 folder name
+    required: false
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.management-token }}
+    - ${{ inputs.space-id }}
+    - ${{ inputs.contentful-environment}}

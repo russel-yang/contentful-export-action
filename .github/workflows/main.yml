@@ -1,0 +1,23 @@
+on: [push]
+
+jobs:
+  contentful_export:
+    runs-on: ubuntu-latest
+    name: A job to backup contentful to AWS s3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: backup contentful
+        uses: ./
+        with:
+          management_token: ${{ secrets.CONTENTFUL_MANAGEMENT_TOKEN }}
+          space_id: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          contentful_environment: sandbox
+          download_assets: false
+          bucket_name: ${{secrets.S3_BUCKET_NAME}}
+          project_name: test
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_DEFAULT_REGION: us-west-1
+          AWS_REGION: us-west-1
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
