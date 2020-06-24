@@ -21,6 +21,10 @@ inputs:
   project_name:
     description: the project name used to prefix the S3 folder name
     required: false
+  include_drafts:
+    description: include draft or not
+    required: true
+    default: false
 runs:
   using: "docker"
   image: "Dockerfile"
